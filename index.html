@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Cafe Latrio – Berlin Monbijouplatz | Café & Frühstück</title>
+  <!-- SEO essentiel -->
+  <meta name="description" content="Cafe Latrio à Berlin : petit‑déjeuner, déjeuner, spécialités maison. Ambiance chaleureuse, produits frais. Réservez en ligne.">
+  <meta name="keywords" content="Café Berlin, Frühstück, Mittagessen, Monbijouplatz, Café Latrio, petit-déjeuner Berlin, brunch">
+  <meta name="author" content="Cafe Latrio">
+  <!-- Open Graph / partage réseaux -->
+  <meta property="og:title" content="Cafe Latrio – Pause café au cœur de Berlin">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cafelatrio.berlin">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2078&q=80">
+  <meta property="og:description" content="Café, petits‑déjeuners copieux, déjeuners faits maison. Réservez votre table en ligne.">
+  <!-- Google Fonts : Playfair + Poppins (élégant) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (gratuit) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Swiper CSS (uniquement pour les avis, plus pour la galerie) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- AOS (scroll animations) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <style>
+    /* ----- RESET & VARIABLES (tons café) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fefaf5;  /* crème clair */
+      color: #2e2a27;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #3e2e23;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #b48c5c;   /* or doux */
+      margin: 1rem auto 0;
+    }
+
+    /* Palette chaleureuse */
+    :root {
+      --primary: #b48c5c;       /* brun clair / or */
+      --primary-dark: #8b6b42;
+      --secondary: #5a4a3a;
+      --light-bg: #f7f0e7;
+      --dark: #2e2a27;
+      --white: #ffffff;
+      --shadow: 0 15px 35px -10px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    /* ----- BOUTONS & ÉLÉMENTS ----- */
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.9rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 8px 20px rgba(180,140,92,0.3);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(180,140,92,0.4);
+    }
+
+    /* ----- NAVIGATION (mobile first) ----- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      z-index: 1000;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+    .logo span {
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+      color: #6b5a4a;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-menu a {
+      font-weight: 500;
+      font-size: 1rem;
+      transition: var(--transition);
+      border-bottom: 2px solid transparent;
+      padding-bottom: 5px;
+      color: var(--dark);
+    }
+    .nav-menu a:hover {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 6px;
+    }
+    .hamburger span {
+      width: 30px;
+      height: 3px;
+      background: var(--dark);
+      transition: var(--transition);
+    }
+
+    /* mobile */
+    @media (max-width: 900px) {
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background: var(--white);
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        padding: 2rem 0;
+        gap: 1.5rem;
+        transition: 0.4s;
+      }
+      .nav-menu.active {
+        left: 0;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* ----- HERO (plein écran) ----- */
+    .hero {
+      height: 100vh;
+      min-height: 700px;
+      background: linear-gradient(rgba(30, 20, 10, 0.3), rgba(20, 15, 10, 0.5)), 
+                  url('https://github.com/previewsiteweb/resource/blob/main/imagecafelatro.webp?raw=true') center/cover fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 1000px;
+      padding: 2rem;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .hero-content h1 {
+      font-size: 5rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.4);
+      line-height: 1.1;
+      color: white;
+    }
+    .hero-content .tagline {
+      font-size: 1.8rem;
+      font-style: italic;
+      margin: 1rem 0 2rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+    }
+    .hero-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      font-size: 1.2rem;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+      padding: 1rem 2rem;
+      border-radius: 60px;
+    }
+    .hero-info i {
+      color: var(--primary);
+      margin-right: 8px;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ----- À PROPOS ----- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p {
+      margin-bottom: 1.5rem;
+      color: #4a3f38;
+      font-size: 1.1rem;
+    }
+    .about-text h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+    .about-image {
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s;
+    }
+    .about-image:hover img {
+      transform: scale(1.03);
+    }
+
+    /* ----- MENU (carte détaillée) ----- */
+    .menu-category {
+      margin-bottom: 4rem;
+    }
+    .category-title {
+      font-size: 2.2rem;
+      border-left: 6px solid var(--primary);
+      padding-left: 1.3rem;
+      margin-bottom: 2rem;
+      color: #3e2e23;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .menu-item {
+      background: white;
+      border-radius: 25px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+      transition: var(--transition);
+      border: 1px solid rgba(180,140,92,0.1);
+    }
+    .menu-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+      border-color: var(--primary);
+    }
+    .menu-item h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .menu-item .price {
+      color: var(--primary);
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+    }
+    .menu-item p {
+      color: #6b5a4a;
+      font-size: 0.95rem;
+    }
+    .menu-item .note {
+      font-size: 0.85rem;
+      color: #9b8b7a;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* ----- GALERIE (petites cartes) ----- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .gallery-item {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 1 / 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ----- RÉSERVATION ----- */
+    .booking-form {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 40px;
+      box-shadow: var(--shadow);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border: 1px solid #e0d6cc;
+      border-radius: 50px;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      background: #fcf9f5;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(180,140,92,0.2);
+    }
+    .booking-form .btn {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 1.2rem;
+    }
+
+    /* ----- CONTACT & MAP ----- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .contact-info {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .info-item i {
+      font-size: 1.8rem;
+      color: var(--primary);
+      width: 40px;
+    }
+    .map-container {
+      border-radius: 30px;
+      overflow: hidden;
+      height: 100%;
+      min-height: 400px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ----- AVIS CLIENTS (testimonials) ----- */
+    .testimonials-slider {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      margin: 1rem;
+      text-align: center;
+    }
+    .testimonial-card i {
+      color: var(--primary);
+      font-size: 2rem;
+      opacity: 0.4;
+    }
+    .testimonial-card p {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin: 1rem 0;
+    }
+    .stars {
+      color: #f5b342;
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+    .client-name {
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      background: #2b221c;
+      color: #ddd;
+      padding: 3.5rem 0 1.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2.5rem;
+    }
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 0.8rem;
+    }
+    .footer-col i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transition: var(--transition);
+      color: white;
+    }
+    .social-icons a:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 2.5rem;
+      margin-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* ----- RESPONSIVE (max‑mobile) ----- */
+    @media (max-width: 992px) {
+      .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+      .hero-info {
+        flex-direction: column;
+        gap: 0.8rem;
+        border-radius: 30px;
+      }
+    }
+    @media (max-width: 576px) {
+      .section { padding: 3rem 0; }
+      .hero-content h1 { font-size: 2.8rem; }
+      .tagline { font-size: 1.3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .booking-form { padding: 2rem; }
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation (hamburger moderne) -->
+  <nav class="navbar">
+    <div class="logo">Cafe Latrio <span>Monbijouplatz 4</span></div>
+    <ul class="nav-menu">
+      <li><a href="#home">Accueil</a></li>
+      <li><a href="#about">Histoire</a></li>
+      <li><a href="#menu">Carte</a></li>
+      <li><a href="#gallery">Galerie</a></li>
+      <li><a href="#booking">Réservation</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#testimonials">Avis</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION (plein écran) -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 data-aos="fade-down">Cafe Latrio</h1>
+      <div class="tagline" data-aos="fade-up" data-aos-delay="100">Votre pause café au cœur de Berlin</div>
+      <div class="hero-info" data-aos="fade-up" data-aos-delay="200">
+        <span><i class="fas fa-map-marker-alt"></i> Monbijouplatz 4, 10117 Berlin</span>
+        <span><i class="fas fa-phone-alt"></i> +49 30 12345678</span>
+        <span><i class="far fa-clock"></i> Lun–Ven 8h–18h · Sam–Dim 9h–18h</span>
+      </div>
+      <a href="#booking" class="btn" data-aos="zoom-in" data-aos-delay="300">Réserver une table</a>
+    </div>
+  </section>
+
+  <!-- SECTION À PROPOS -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade">Bienvenue au Latrio</h2>
+      <div class="about-grid">
+        <div class="about-text" data-aos="fade-right">
+          <h3>Un café authentique à Berlin</h3>
+          <p>Depuis 2015, le Cafe Latrio est le rendez‑vous des amateurs de petit‑déjeuner copieux et de déjeuners faits maison. Dans un cadre lumineux et cosy, nous mettons à l’honneur des produits frais, des recettes traditionnelles et une ambiance chaleureuse.</p>
+          <p>Notre équipe vous accueille tous les jours pour un moment de détente, que ce soit pour un café de spécialité, un brunch entre amis ou un déjeuner rapide. Nous préparons nous‑mêmes nos pâtes, nos salades et nos soupes – sans additifs ni conservateurs.</p>
+        </div>
+        <div class="about-image" data-aos="fade-left">
+          <img src="https://github.com/previewsiteweb/resource/blob/main/imagecafelatro1.webp?raw=true" alt="Intérieur du café Latrio">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION MENU (carte complète d'après l'image) -->
+  <section id="menu" class="section" style="background: var(--light-bg);">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade">Notre Carte</h2>
+      
+      <!-- Frühstück / Petit‑déjeuner -->
+      <div class="menu-category" data-aos="fade-up">
+        <h3 class="category-title">🍳 Frühstück – Petit‑déjeuner</h3>
+        <div class="menu-grid">
+          <!-- 1 City Frühstück -->
+          <div class="menu-item"><h4>City Frühstück <span class="price">14,00€</span></h4><p>Café, Brötchen, Salat, Salami, Marmelade, Butter, Brotback, Obst‑ und Gemüsebrötchen, Salat</p></div>
+          <!-- 2 Käse Frühstück -->
+          <div class="menu-item"><h4>Käse Frühstück <span class="price">13,60€</span></h4><p>Verschiedene Käsesorten, hausgemachte Pasten, Marmelade, Butter, Brotback, Obst‑ und Gemüsebrötchen, Salat</p></div>
+          <!-- 3 Lachs Frühstück -->
+          <div class="menu-item"><h4>Lachs Frühstück <span class="price">16,90€</span></h4><p>Räucherlachs, Rührei, Frischkäse, Meeresfrüchte, Butter, Brotback, Obst‑ und Gemüsebrötchen, Salat</p></div>
+          <!-- 4 Röhrl Frühstück -->
+          <div class="menu-item"><h4>Röhrl Frühstück <span class="price">14,60€</span></h4><p>Röhrl (Spiegelei), Feuilletage, Marmelade, Butter, Brotback, Obst‑ und Gemüsebrötchen, Salat</p></div>
+          <!-- 5 Mageresegg -->
+          <div class="menu-item"><h4>Mageresegg <span class="price">15,90€</span></h4><p>Butter, Salz, Käse, Eier (mit Tomaten, Zwiebel, Paprika), Salat</p></div>
+          <!-- 6 Omelett -->
+          <div class="menu-item"><h4>Omelett <span class="price">15,90€</span></h4><p>Omelette mit Salat, Salat, Salat, Salat, Salat, Salat, Salat</p></div>
+          <!-- 7 Vegan Breakfast (Vorgaben) -->
+          <div class="menu-item"><h4>Vegan Breakfast <span class="price">14,90€</span></h4><p>Hausgemachte mediterrane Pasten & Salate, Brotback, Obst‑ und Gemüsebrötchen, Salat</p></div>
+          <!-- 8 Frühstück für zwei -->
+          <div class="menu-item"><h4>Frühstück für zwei <span class="price">39,50€</span></h4><p>Wurst‑ und Käsesorten, Tomate‑Mozzarella, Butter, Marmelade, zwei Eier, Räucherlachs, Meerrettich, Pasten, Brotback, Salat</p></div>
+          <!-- 9 Französisches Frühstück -->
+          <div class="menu-item"><h4>Französisches Frühstück <span class="price">9,90€</span></h4><p>Croissant, Marmelade, Butter, Granola (glutenfrei möglich), Fruits, Yaourt, jus de fruits, café/thé</p></div>
+          <!-- 10 Toast (2 garnitures) -->
+          <div class="menu-item"><h4>Toast <span class="price">8,50€</span></h4><p>Toast végétarien (2 garnitures au choix) : Schinken/Käse ou Tomate‑Mozzarella</p></div>
+          <!-- 11 Salatmi -->
+          <div class="menu-item"><h4>Salatmi <span class="price">15,90€</span></h4><p>Salat, fromage, jambon, fromage, tomates‑mozzarella</p></div>
+          <!-- 12 Caprese Frühstück -->
+          <div class="menu-item"><h4>Caprese Frühstück <span class="price">10,90€</span></h4><p>Tomate‑Mozzarella, Pesto, Marmelade, Butter, Brotback, Obst‑ und Gemüsebrötchen, Salat</p></div>
+        </div>
+      </div>
+
+      <!-- Mittagessen / Déjeuner -->
+      <div class="menu-category" data-aos="fade-up">
+        <h3 class="category-title">🥘 Mittagessen – Déjeuner</h3>
+        <div class="menu-grid">
+          <div class="menu-item"><h4>Mittagstisch <span class="price">wechselnd</span></h4><p>Montag – Freitag wechselnde warme Gerichte · Monday – Friday hot dishes</p></div>
+          <div class="menu-item"><h4>Chili con Carne <span class="price">9,90€</span></h4><p>Hausgemachtes Chili con Carne, dazu ein Brötchen · homemade with bread roll</p></div>
+          <div class="menu-item"><h4>Suppen <span class="price">7,90€</span></h4><p>Frische hausgemachte Linsen‑ und Kürbispaprika‑Suppe (ohne Geschmacksverstärker), dazu ein Brötchen</p></div>
+          <div class="menu-item"><h4>Salatteller <span class="price">12,90€</span></h4><p>Wählen Sie Ihren eigenen Salatteller aus mediterranen Salaten & Pasten. Vegetarisch/vegan.</p></div>
+        </div>
+      </div>
+      <p class="note" style="text-align:center;">* Tous nos plats sont préparés avec des produits frais. Allergènes sur demande.</p>
+    </div>
+  </section>
+
+  <!-- GALERIE (petites cartes) -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade">Galerie</h2>
+      <div class="gallery-grid" data-aos="zoom-in">
+        <div class="gallery-item"><img src="https://github.com/previewsiteweb/resource/blob/main/imagecafelatro2.webp?raw=true" alt="Café et pâtisserie"></div>
+        <div class="gallery-item"><img src="https://github.com/previewsiteweb/resource/blob/main/imagecafelatro3.webp?raw=true" alt="Petit‑déjeuner copieux"></div>
+        <div class="gallery-item"><img src="https://github.com/previewsiteweb/resource/blob/main/imagecafelatro4.webp?raw=true" alt="Intérieur café"></div>
+        <div class="gallery-item"><img src="https://github.com/previewsiteweb/resource/blob/main/imagecafelatro5.webp?raw=true" alt="Plat"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTÈME DE RÉSERVATION -->
+  <section id="booking" class="section" style="background: var(--light-bg);">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade">Réserver votre table</h2>
+      <div class="booking-form" data-aos="flip-up">
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group"><label>Nom complet</label><input type="text" id="name" placeholder="Max Mustermann" required></div>
+            <div class="form-group"><label>Téléphone</label><input type="tel" id="phone" placeholder="+49 30 123456" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="max@example.com" required></div>
+            <div class="form-group"><label>Personnes</label><select id="guests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option></select></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Date</label><input type="date" id="date" required></div>
+            <div class="form-group"><label>Heure</label><input type="time" id="time" required></div>
+          </div>
+          <button type="submit" class="btn">Réserver maintenant</button>
+          <div id="bookingMessage" style="margin-top:1rem; text-align:center;"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT + GOOGLE MAPS -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade">Contact & Accès</h2>
+      <div class="contact-grid">
+        <div class="contact-info" data-aos="fade-right">
+          <div class="info-item"><i class="fas fa-map-pin"></i> <span>Monbijouplatz 4, 10117 Berlin (Mitte)</span></div>
+          <div class="info-item"><i class="fas fa-phone"></i> <span>+49 30 12345678</span></div>
+          <div class="info-item"><i class="fas fa-envelope"></i> <span>hallo@cafelatrio.berlin</span></div>
+          <div class="info-item"><i class="far fa-clock"></i> <span>Lun–Ven 8h–18h · Sam–Dim 9h–18h</span></div>
+          <h4 style="margin: 2rem 0 1rem;">Écrivez‑nous</h4>
+          <form id="contactForm">
+            <div class="form-group"><input type="text" placeholder="Nom" id="contactName" required></div>
+            <div class="form-group"><input type="email" placeholder="Email" id="contactEmail" required></div>
+            <div class="form-group"><textarea rows="4" placeholder="Votre message..." id="contactMessage" required></textarea></div>
+            <button type="submit" class="btn" style="width:100%">Envoyer</button>
+            <div id="contactMessageStatus" style="margin-top:1rem;"></div>
+          </form>
+        </div>
+        <div class="map-container" data-aos="fade-left">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2427.636849150581!2d13.398735315785154!3d52.52167617981519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84e1f9b3b3b3b%3A0x8a3b3b3b3b3b3b!2sMonbijouplatz%204%2C%2010117%20Berlin!5e0!3m2!1sfr!2sde!4v1614321234567!5m2!1sfr!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS CLIENTS (avec note et slider) -->
+  <section id="testimonials" class="section" style="background: var(--light-bg);">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade">Ce qu'ils disent</h2>
+      <div class="testimonials-slider swiper testiSwiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide testimonial-card"><i class="fas fa-quote-left"></i><p>Meilleur petit‑déjeuner de Berlin ! Le Lachs Frühstück est incroyable, service adorable.</p><div class="stars">★★★★★</div><span class="client-name">- Laura K.</span></div>
+          <div class="swiper-slide testimonial-card"><i class="fas fa-quote-left"></i><p>Ambiance cosy, café délicieux et salades super fraîches. Je reviens chaque semaine.</p><div class="stars">★★★★★</div><span class="client-name">- Jonas M.</span></div>
+          <div class="swiper-slide testimonial-card"><i class="fas fa-quote-left"></i><p>Le Frühstück für zwei est parfait pour partager. Très belle adresse à Monbijouplatz.</p><div class="stars">★★★★☆</div><span class="client-name">- Sophie W.</span></div>
+          <div class="swiper-slide testimonial-card"><i class="fas fa-quote-left"></i><p>Accueil chaleureux, options végétariennes et vegan. Le Caprese Frühstück est top !</p><div class="stars">★★★★★</div><span class="client-name">- Clara B.</span></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Cafe Latrio</h4>
+          <p>Café · Frühstück · Mittagessen · Berlin‑Mitte</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-tripadvisor"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Horaires</h4>
+          <ul><li>Lundi–Vendredi: 8h – 18h</li><li>Samedi–Dimanche: 9h – 18h</li><li>Fermé le 24.12 & 31.12</li></ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><i class="fas fa-phone"></i> +49 30 12345678</li>
+            <li><i class="fas fa-envelope"></i> hallo@cafelatrio.berlin</li>
+            <li><i class="fas fa-map-marker-alt"></i> Monbijouplatz 4, 10117 Berlin</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2026 Cafe Latrio – Tous droits réservés. <a href="#" style="color:#b48c5c;">Mentions légales</a> – <a href="#" style="color:#b48c5c;">Politique de confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Initialisation AOS
+    AOS.init({ duration: 1000, once: true, offset: 100 });
+
+    // Menu mobile toggle
+    function toggleMenu() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    }
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-menu').classList.remove('active');
+      });
+    });
+
+    // Swiper pour les avis uniquement (la galerie est maintenant en grid)
+    var testiSwiper = new Swiper(".testiSwiper", {
+      loop: true,
+      autoplay: { delay: 5000 },
+      pagination: { el: ".swiper-pagination", clickable: true },
+      slidesPerView: 1,
+      breakpoints: { 768: { slidesPerView: 2 } }
+    });
+
+    // Simulation envoi formulaire de réservation
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msgDiv = document.getElementById('bookingMessage');
+      msgDiv.innerHTML = '<span style="color:#b48c5c; font-weight:500;">✓ Demande envoyée ! Nous vous confirmons par téléphone sous 1h.</span>';
+      this.reset();
+    });
+
+    // Simulation envoi formulaire de contact
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const msgDiv = document.getElementById('contactMessageStatus');
+      msgDiv.innerHTML = '<span style="color:#b48c5c; font-weight:500;">✓ Message reçu. Nous répondons dans les 24h.</span>';
+      this.reset();
+    });
+
+    // Ajustement date minimum pour réservation (aujourd'hui)
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+  </script>
+</body>
+</html>
